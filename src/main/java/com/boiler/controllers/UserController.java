@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.boiler.config.security.ViewProfiles;
 import com.boiler.entities.User;
 import com.boiler.entities.UserDto;
 import com.boiler.services.UserServiceImpl;
@@ -27,8 +28,7 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
-    //@JsonView(ViewProfiles.ShowBasic.class)
-    //@Secured({"ROLE_ADMIN", "ROLE_USER"})
+    //@JsonView(ViewProfiles.ShowAll.class)
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value="/secure", method = RequestMethod.GET)
     public List<User> listUser(){

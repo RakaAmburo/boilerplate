@@ -2,13 +2,17 @@ package com.boiler.entities;
 
 import java.util.Set;
 
+import com.boiler.config.security.ViewProfiles;
+import com.fasterxml.jackson.annotation.JsonView;
 
+@JsonView(ViewProfiles.Public.class)
 public class User {
 
 	private Long id;
 	private String userName;
 	private String passWord;
 	
+	@JsonView(ViewProfiles.ShowAll.class)
 	private Set<Role> roles;
 
 	public Set<Role> getRoles() {

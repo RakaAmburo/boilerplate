@@ -38,7 +38,7 @@ public class RoleRepo {
 	
 	public Set<Role> getRoleByUserId(Long id){
 		
-		String sql = "select r.id, r.name, r.description from roles r join user_roles ur on ur.roleId = 1 where ur.userId = ?";
+		String sql = "select r.id, r.name, r.description from roles r join user_roles ur on ur.roleId = r.id where ur.userId = ?";
 		RowMapper<Role> rowMapper = new RoleRowMapper();
 		return new HashSet<Role>(this.jdbcTemplate.query(sql, rowMapper, id));
 	}

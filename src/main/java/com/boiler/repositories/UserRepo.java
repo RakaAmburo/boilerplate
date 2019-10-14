@@ -39,7 +39,12 @@ public class UserRepo {
 
 		String sql = "select id, username, password from users";
 		RowMapper<User> rowMapper = new UserRowMapper();
-		return this.jdbcTemplate.query(sql, rowMapper);
+		List<User> list = this.jdbcTemplate.query(sql, rowMapper);
+		list.stream().forEach(u -> {
+			Set<Role> roleList = roleRepo.getRoleByUserId(u.getId());
+			u.setRoles(roleList);
+		});
+		return list;
 
 	}
 
